@@ -62,7 +62,7 @@ document.getElementById("myDate").innerHTML = month +1 + "/" + date + "/" + year
 
 // STEP 11: Record the start time using new Date().getTime()
 //          This gives you the current time in milliseconds.
-
+let nowTime = new Date().getTime()
 // STEP 12: Create a variable to hold the timer ID (for stopping later).
 //          Use setInterval() with a delay of 10 milliseconds.
 //          Inside the interval function:
@@ -70,8 +70,11 @@ document.getElementById("myDate").innerHTML = month +1 + "/" + date + "/" + year
 //          b) Calculate elapsed seconds: (currentTime - startTime) / 1000
 //          c) Display the elapsed time using .toFixed(3)
 //             in the element with ID "myTimer"
-
-
+let hold = setInterval(function() {
+    let currentTime = new Date().getTime();
+    let elapsed = (currentTime - startTime) / 1000;
+    document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
+}, 10);
 // ============================================
 //  PART 3: Start/Stop Toggle Button
 // ============================================
@@ -96,3 +99,20 @@ document.getElementById("myDate").innerHTML = month +1 + "/" + date + "/" + year
 //             - Start a new setInterval (same as STEP 12)
 //             - Change button innerHTML to "Stop"
 //             - Set running to true
+document.getElementById("myBtn").addEventListener("click", function() {
+    if (running) {
+        clearInterval(hold);
+        document.getElementById("myBtn").innerHTML = "Start";
+        running = false;
+    } else {
+        startTime = new Date().getTime();
+        document.getElementById("myTimer").innerHTML = "0.000";
+        hold = setInterval(function() {
+            let currentTime = new Date().getTime();
+            let elapsed = (currentTime - startTime) / 1000;
+            document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
+        }, 10);
+        document.getElementById("myBtn").innerHTML = "Stop";
+        running = true;
+    }
+});
