@@ -99,6 +99,48 @@ let hold = setInterval(function() {
 //             - Start a new setInterval (same as STEP 12)
 //             - Change button innerHTML to "Stop"
 //             - Set running to true
+// STEP 11: Record the start time using new Date().getTime()
+//          This gives you the current time in milliseconds.
+let startTime = new Date().getTime();
+
+// STEP 12: Create a variable to hold the timer ID (for stopping later).
+//          Use setInterval() with a delay of 10 milliseconds.
+//          Inside the interval function:
+//          a) Get the current time: new Date().getTime()
+//          b) Calculate elapsed seconds: (currentTime - startTime) / 1000
+//          c) Display the elapsed time using .toFixed(3)
+//             in the element with ID "myTimer"
+let hold = setInterval(function() {
+    let currentTime = new Date().getTime();
+    let elapsed = (currentTime - startTime) / 1000;
+    document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
+}, 10);
+
+// ============================================
+//  PART 3: Start/Stop Toggle Button
+// ============================================
+// The button starts as "Stop" (timer is running).
+// Clicking it should:
+//   - If timer is running: stop it (clearInterval) and
+//     change button text to "Start"
+//   - If timer is stopped: restart it from 0 and change
+//     button text to "Stop"
+
+// STEP 13: Create a variable to track whether the timer is
+//          currently running (let running = true;)
+let running = true;
+
+// STEP 14: Add a click event listener to the button (ID "myBtn").
+//          Inside the listener:
+//          a) If running is true:
+//             - Use clearInterval() to stop the timer
+//             - Change button innerHTML to "Start"
+//             - Set running to false
+//          b) If running is false:
+//             - Record a new start time
+//             - Start a new setInterval (same as STEP 12)
+//             - Change button innerHTML to "Stop"
+//             - Set running to true
 document.getElementById("myBtn").addEventListener("click", function() {
     if (running) {
         clearInterval(hold);
@@ -107,11 +149,13 @@ document.getElementById("myBtn").addEventListener("click", function() {
     } else {
         startTime = new Date().getTime();
         document.getElementById("myTimer").innerHTML = "0.000";
+
         hold = setInterval(function() {
             let currentTime = new Date().getTime();
             let elapsed = (currentTime - startTime) / 1000;
             document.getElementById("myTimer").innerHTML = elapsed.toFixed(3);
         }, 10);
+
         document.getElementById("myBtn").innerHTML = "Stop";
         running = true;
     }
