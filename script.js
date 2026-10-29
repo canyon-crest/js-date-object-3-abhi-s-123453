@@ -62,7 +62,7 @@ document.getElementById("myDate").innerHTML = month +1 + "/" + date + "/" + year
 
 // STEP 11: Record the start time using new Date().getTime()
 //          This gives you the current time in milliseconds.
-let nowTime = new Date().getTime()
+let startTime = new Date().getTime()
 // STEP 12: Create a variable to hold the timer ID (for stopping later).
 //          Use setInterval() with a delay of 10 milliseconds.
 //          Inside the interval function:
